@@ -3,11 +3,11 @@
         <form v-on:submit="login()" action="" method="get">
             <div>
                 <label>Email:</label>
-                <input v-model="user.email" type="text" name="" id="email" placeholder="email">
+                <input v-model="user.email" type="text" name="" id="email" placeholder="email" required>
             </div>
             <div>
                 <label>Mot de passe:</label>
-                <input v-model="user.password" type="password" name="" id="password" placeholder="password">
+                <input v-model="user.password" type="password" name="" id="password" placeholder="password" required>
             </div>    
             <input type="submit" value="Login">
         </form>
@@ -15,8 +15,6 @@
 </template>
 
 <script>
-    import api from '../api'
-
     export default {
         data() {
             return {
@@ -28,10 +26,7 @@
         },
         methods: {
             login () {
-                api.post("/members/signin", this.user).then( (res) => {
-                    console.log(res.data.token)
-                    this.$store.dispatch('login', res.data.token)
-                });
+                this.$store.dispatch('login', this.user)
             }
         }
     }
