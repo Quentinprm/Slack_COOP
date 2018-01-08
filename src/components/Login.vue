@@ -1,9 +1,15 @@
 <template>
     <div>
-        <form action="" method="post">
-            <input v-model="user.email" type="text" name="" id="email" placeholder="email">
-            <input v-model="user.password" type="password" name="" id="password" placeholder="password">
-            <input type="button" value="Login" @click="login">
+        <form v-on:submit="login()" action="" method="get">
+            <div>
+                <label>Email:</label>
+                <input v-model="user.email" type="text" name="" id="email" placeholder="email">
+            </div>
+            <div>
+                <label>Mot de passe:</label>
+                <input v-model="user.password" type="password" name="" id="password" placeholder="password">
+            </div>    
+            <input type="submit" value="Login">
         </form>
     </div>
 </template>
