@@ -4,6 +4,7 @@
 		<div class="imgcontainer">
 			<img src="../assets/logo.png"/>
 		</div>
+			<button  v-on:click="logout()">déconnexion</button>
 			<h2>Channels</h2>
 			<p id="add">
 					<router-link :to="{ path: '/' }">Créer un channel</router-link>
@@ -26,6 +27,12 @@ export default {
 	data () {
 		return {
 			channels: []
+		}
+	},
+	methods:{
+		logout(){
+				this.$store.dispatch('auth/logout',true);
+				this.$router.push({path:'/'});
 		}
 	},
 	created () {
@@ -89,19 +96,23 @@ export default {
     background-color:deepskyblue;
     color: white;
 }
-
+button{
+	width:60%;
+	margin: auto;
+	margin-bottom:2px;
+}
 #add {
 margin:0;
 margin-bottom:2px;
 }
-#add a{
+button,#add a{
 	display: block;
 color: white;
 padding: 8px 16px;
 text-decoration: none;
 background-color:deepskyblue;
 }
-#add a:hover{
+button:hover,#add a:hover{
 	background-color:dodgerblue;
 }
 #right{

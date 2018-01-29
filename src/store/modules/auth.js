@@ -41,7 +41,6 @@ export default {
 		logout ({commit}, forceDeco) {
 			commit("initState")
 			ls.remove('token')
-
 			if(forceDeco){
 				api.delete('/members/signout').then(response => {
 					commit("initState")
