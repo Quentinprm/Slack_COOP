@@ -3,11 +3,11 @@
 		<div id="channels">
 			<h2>Channels</h2>
 			<p v-for="chan in channels" class="chan">
-				{{ chan._id }}
+				<router-link :to="{ path: '/' + chan._id }">{{chan.label}}</router-link>
 			</p>
 		</div>
 
-		<router-view></router-view>
+		<router-view :key="$route.fullPath"></router-view>
 	</div>
 </template>
 
