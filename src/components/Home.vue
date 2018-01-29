@@ -117,6 +117,7 @@ button:hover,#add a:hover{
 }
 #right{
 width:75%;
+height:100%;
  margin-left:25%;
  padding:1px 16px;
 }

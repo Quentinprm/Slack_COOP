@@ -1,14 +1,21 @@
 <template>
 	<div>
-		<h1>Channel messages!<button @click="deleteChan()">Delete Channel</button></h1>
-            {{channelData}}
+		<div id="messages">
+			<h1>Channel messages!<button @click="deleteChan()">X</button></h1>
+				<div v-for="com in channelData" class="comment">
+				<div class="entete">
+				<h3>{{com.member_id}} à {{com.created_at}}</h3>
+				</div>
+				<p>{{com.message}}</p>
+				</div>
 
+		</div>
+		<div id="ecrire">
         <form @submit.prevent="sendMessage()">
-            <label for="comment">Comment :</label>
             <textarea v-model="comment" id="comment" placeholder="Votre commentaire..."></textarea>
-
             <input type="submit" value="Send">
         </form>
+	</div>
 	</div>
 </template>
 
@@ -40,15 +47,15 @@ export default {
 	methods: {
         deleteChan () {
             api.delete('/channels/' + this.idChannel, this.token).then((response) => {
-                this.$router.push({path: '/'})            
+                this.$router.push({path: '/'})
             });
-        }, 
+        },
         sendMessage() {
             let params = {
                 token: this.token,
                 message: this.comment
             }
-            api.post('/channels/' + this.idChannel + '/posts', params).then((response) => {                
+            api.post('/channels/' + this.idChannel + '/posts', params).then((response) => {
                 api.get('/channels/' + this.$route.params.id + '/posts', ls.get('token')).then((response) => {
                     this.channelData = response.data
                 });
@@ -57,3 +64,42 @@ export default {
 	}
 }
 </script>
+
+<style>
+#messages{
+	height:90vh;
+	overflow:scroll;
+}
+#messages h1{
+	text-align:center;
+	color:deepskyblue;
+}
+#ecrire{
+	height:10vh;
+	bottom:0;
+}
+.comment{
+border: 1px solid gainsboro;
+margin-bottom:3px;
+}
+textarea{
+width:100%;
+resize:none;
+}
+.entete{
+text-align:center;
+color:#485166;
+border-bottom: 0.5px solid gainsboro;
+}
+
+input[type=submit] {
+    background-color: deepskyblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+</style>
