@@ -72,7 +72,8 @@ export default {
 <style>
 #messages{
 	height:90vh;
-	overflow:scroll;
+	overflow-y:scroll;
+    overflow-x: none;
 }
 #messages h1{
 	text-align:center;
