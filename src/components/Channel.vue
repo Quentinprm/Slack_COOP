@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1>Channel messages!</h1>
-
+				{{token}}
         {{channelData}}
 	</div>
 </template>
@@ -19,7 +19,7 @@ export default {
             token: ls.get('token')
 		}
     },
-    
+
     created () {
         api.get('/channels/' + this.$route.params.id + '/posts', ls.get('token')).then((response) => {
             this.channelData = response.data
@@ -27,7 +27,7 @@ export default {
     },
 
 	methods: {
-        
+
 	}
 }
 </script>

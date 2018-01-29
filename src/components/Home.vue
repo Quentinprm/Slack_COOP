@@ -21,12 +21,12 @@ export default {
 		}
 	},
 	created () {
-		
+
 		api.get('/channels').then((response) => {
 			this.channels = response.data
 		});
-		
-	}, 
+
+	},
 	computed: {
 		hasChannel () {
 			return this.channels.length > 0
