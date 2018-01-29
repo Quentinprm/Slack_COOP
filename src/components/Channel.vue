@@ -49,13 +49,9 @@ export default {
 	methods: {
         deleteChan () {
             api.delete('/channels/' + this.idChannel, this.token).then((response) => {
-<<<<<<< HEAD
                 this.$router.push({path: '/'})
-=======
-                this.$router.push({path: '/'})            
             }).catch( (error) => {
                 alert("Le channel que vous essayez de supprimer n'existe pas !")
->>>>>>> master
             });
         },
         sendMessage() {
