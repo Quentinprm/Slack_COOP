@@ -1,4 +1,4 @@
-# slack_coop
+# coop
 
 > A Vue.js project
 
