@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import ls from '@/services/ls'
+import api from '@/api'
 
 export default {
 	data () {
@@ -25,8 +27,21 @@ export default {
 	},
 	methods: {
 		createChan () {
+			/*
 			this.$store.dispatch('chan/createChan', this.channelData).then(response => {
-				this.$router.push({name: "home"})
+				this.$router.push({path: '/'})
+			})
+			*/arguments
+			let params = {
+                token: ls.get('token'),
+                label: this.channelData.label,
+                topic: this.channelData.topic
+            }
+
+            api.post('/channels', params).then(response => {
+				this.$router.push({path: '/' + response.data._id})            
+			}).catch(error => {
+				console.log(error)
 			})
 		}
 	}
