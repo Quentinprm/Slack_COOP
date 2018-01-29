@@ -80,8 +80,6 @@ input[type=submit] {
     width: 100%;
 }
 
-imput[type=submit]:hover{
-	opacity: 0.8;
-}
+
 
 </style>
