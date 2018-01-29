@@ -41,7 +41,7 @@ export default {
             api.post('/channels', params).then(response => {
 				this.$router.push({path: '/' + response.data._id})
 			}).catch(error => {
-				console.log(error)
+				alert("Un channel ayant déjà ce nom existe déjà !")
 			})
 		}
 	}
