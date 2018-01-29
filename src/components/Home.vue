@@ -1,13 +1,21 @@
 <template>
 	<div id="container">
 		<div id="channels">
+		<div class="imgcontainer">
+			<img src="../assets/logo.png"/>
+		</div>
 			<h2>Channels</h2>
+			<p id="add">
+					<router-link :to="{ path: '/' }">Créer un channel</router-link>
+			</P>
 			<p v-for="chan in channels" class="chan">
 				<router-link :to="{ path: '/' + chan._id }">{{chan.label}}</router-link>
 			</p>
-		</div>
 
-		<router-view :key="$route.fullPath"></router-view>
+		</div>
+		<div id="right">
+			<router-view :key="$route.fullPath"></router-view>
+		</div>
 	</div>
 </template>
 
@@ -42,31 +50,63 @@ export default {
 		width: 100%;
 		display: flex;
 	}
-
-	.chan {
-		color: #ecf0f1;
-		margin: 0;
-		margin-top: 10px;
-		margin-left: 10px;
-		font-size: 20px;
+	.imgcontainer{
+	    text-align: center;
+	    margin: 24px 0 12px 0;
+	}
+	img {
+	    width: 30%;
 	}
 
 	#channels {
-		background: #2c3e50;
-		width: 200px;
-		height: 100vh;
-		color: #ecf0f1;
+	list-style-type:none;
+ margin: 0;
+ padding: 0;
+ width: 25%;
+ background-color: #f1f1f1;
+ position: fixed;
+ height: 100%;
+ overflow: auto;
 	}
-
-	#messages, #reation {
-		margin-left: 20px;
-	}
-
 	h2 {
+		color:grey;
 		text-align: center;
 		margin: 0;
 		padding-bottom: 5px;
 		padding-top: 5px;
-		border-bottom: 2px solid #34495e;
+		border-bottom: 2px solid deepskyblue;
 	}
+	.chan {
+	margin:0;
+	}
+	.chan a{
+		display: block;
+ 	color: #000;
+ 	padding: 8px 16px;
+ 	text-decoration: none;
+	}
+ 	.chan a:hover{
+    background-color:deepskyblue;
+    color: white;
+}
+
+#add {
+margin:0;
+margin-bottom:2px;
+}
+#add a{
+	display: block;
+color: white;
+padding: 8px 16px;
+text-decoration: none;
+background-color:deepskyblue;
+}
+#add a:hover{
+	background-color:dodgerblue;
+}
+#right{
+ margin-left:25%;
+ padding:1px 16px;
+}
+
 </style>
