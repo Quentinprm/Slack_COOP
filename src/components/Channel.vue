@@ -41,13 +41,21 @@ export default {
         this.idChannel = this.$route.params.id
         api.get('/channels/' + this.$route.params.id + '/posts', ls.get('token')).then((response) => {
             this.channelData = response.data
+        }).catch( (error) => {
+            alert("La channel auquel vous essayez d'accéder n'existe pas !")
         });
     },
 
 	methods: {
         deleteChan () {
             api.delete('/channels/' + this.idChannel, this.token).then((response) => {
+<<<<<<< HEAD
                 this.$router.push({path: '/'})
+=======
+                this.$router.push({path: '/'})            
+            }).catch( (error) => {
+                alert("Le channel que vous essayez de supprimer n'existe pas !")
+>>>>>>> master
             });
         },
         sendMessage() {
