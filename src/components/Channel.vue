@@ -5,7 +5,7 @@
 
         <form @submit.prevent="sendMessage()">
             <label for="comment">Comment :</label>
-            <input v-model="comment" id="comment">
+            <textarea v-model="comment" id="comment" placeholder="Votre commentaire..."></textarea>
 
             <input type="submit" value="Send">
         </form>
