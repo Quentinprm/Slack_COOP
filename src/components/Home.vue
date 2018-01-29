@@ -116,6 +116,7 @@ button:hover,#add a:hover{
 	background-color:dodgerblue;
 }
 #right{
+width:75%;
  margin-left:25%;
  padding:1px 16px;
 }
