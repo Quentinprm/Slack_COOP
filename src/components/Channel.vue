@@ -3,19 +3,18 @@
 		<div id="messages">
 			<h1>Channel messages!<button @click="deleteChan()">X</button></h1>
 				<div v-for="com in channelData" class="comment">
-				<div class="entete">
-				<h3>{{com.member_id}} à {{com.created_at}}</h3>
+                    <div class="entete">
+                        <h3>{{members.filter( (member) => member._id === com.member_id)[0].fullname}} à {{com.created_at}}</h3>
+                    </div>
+				    <p>{{com.message}}</p>
 				</div>
-				<p>{{com.message}}</p>
-				</div>
-
-		</div>
+    		</div>
 		<div id="ecrire">
-        <form @submit.prevent="sendMessage()">
-            <textarea v-model="comment" id="comment" placeholder="Votre commentaire..."></textarea>
-            <input type="submit" value="Send">
-        </form>
-	</div>
+            <form @submit.prevent="sendMessage()">
+                <textarea v-model="comment" id="comment" placeholder="Votre commentaire..."></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
 	</div>
 </template>
 
@@ -33,7 +32,8 @@ export default {
             channelData: [],
             idChannel: '',
             token: ls.get('token'),
-            comment: ''
+            comment: '',
+            members: []
 		}
     },
 
@@ -41,6 +41,12 @@ export default {
         this.idChannel = this.$route.params.id
         api.get('/channels/' + this.$route.params.id + '/posts', ls.get('token')).then((response) => {
             this.channelData = response.data
+        }).catch( (error) => {
+            alert("La channel auquel vous essayez d'accéder n'existe pas !")
+        });
+
+        api.get('/members', ls.get('token')).then((response) => {
+            this.members = response.data
         }).catch( (error) => {
             alert("La channel auquel vous essayez d'accéder n'existe pas !")
         });
