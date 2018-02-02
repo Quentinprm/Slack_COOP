@@ -6,6 +6,7 @@ import {router} from './router'
 import store from './store'
 import interceptors from './services/interceptors'
 import ls from './services/ls'
+import VModal from 'vue-js-modal'
 
 Vue.config.productionTip = false
 
@@ -14,6 +15,7 @@ Vue.use(interceptors, {
 	router
 })
 
+Vue.use(VModal, {dialog: true})
 
 /* eslint-disable no-new */
 new Vue({
