@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<div id="messages">
-			<h1>{{channels.filter( (chan) => chan._id === idChannel)[0].label}} - {{channels.filter( (chan) => chan._id === idChannel)[0].topic}}<button @click="deleteChan()">X</button></h1>
+			<h1>{{channels.filter( (chan) => chan._id === idChannel)[0].label}} - {{channels.filter( (chan) => chan._id === idChannel)[0].topic}}
+                <button @click="deleteChan()">Delete</button>
+                <button @click="showModal()">Edit</button>
+            </h1>
 				<div v-for="com in channelData" class="comment">
                     <div class="entete">
                         <h3>{{members.filter( (member) => member._id === com.member_id)[0].fullname}} à {{com.created_at}}</h3>
@@ -15,6 +18,21 @@
                 <input type="submit" value="Send">
             </form>
         </div>
+
+        <modal name="modal">
+            <h2>Edit channel</h2>            
+            <form>
+                <p>Enter the new information :</p>
+
+                <label>Name <br><input id="new-name" type="text"></label>
+                <br>
+                <label>Topic <br><input id="new-topic" type="text"></label>
+            
+                <br>
+                <button id="save-button" @click="saveChanData">Save</button>
+                <button id="cancel-button" @click="hideModal">Cancel</button>
+            </form>
+        </modal>
 	</div>
 </template>
 
@@ -73,7 +91,32 @@ export default {
                     this.channelData = response.data
                 });
             });
-        }
+        },
+        showModal() {
+            this.$modal.show('modal')
+        },
+        hideModal() {
+            this.$modal.hide('modal')
+        },
+        saveChanData(event) {
+            let label = document.getElementById("new-name").value;
+            let topic = document.getElementById("new-topic").value;
+            let params = {
+                token: ls.get('token'),
+                label: label,
+                topic: topic
+            }
+
+            api.put('/channels/' + this.idChannel, params).then((response) => {
+                api.get('/channels', ls.get('token')).then((response) => {
+                    this.channels = response.data
+                })
+            }).catch( error => {
+                alert("Impossible de modifier ce channel !");
+            });
+
+            this.hideModal();
+        },
 	}
 }
 </script>
@@ -114,6 +157,43 @@ input[type=submit] {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+.v--modal-overlay[data-modal="modal"] form {
+    padding-left: 20px;
+}
+
+.v--modal-overlay[data-modal="modal"] h2 {
+    background: deepskyblue;
+    padding: 10px;
+    margin: 0;
+    color: white;
+}
+
+.v--modal-overlay[data-modal="modal"] p {
+    margin-bottom: 25px;
+}
+
+#save-button {
+    background-color: lightgreen;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;    
+    font-weight: bolder;
+}
+
+#cancel-button {
+    background-color: grey;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;   
+    font-weight: bolder;     
 }
 
 </style>
