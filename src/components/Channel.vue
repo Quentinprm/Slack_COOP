@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div id="messages">
-			<h1>Channel messages!<button @click="deleteChan()">X</button></h1>
+			<h1>{{channels.filter( (chan) => chan._id === idChannel)[0].label}} - {{channels.filter( (chan) => chan._id === idChannel)[0].topic}}<button @click="deleteChan()">X</button></h1>
 				<div v-for="com in channelData" class="comment">
                     <div class="entete">
                         <h3>{{members.filter( (member) => member._id === com.member_id)[0].fullname}} à {{com.created_at}}</h3>
@@ -33,7 +33,8 @@ export default {
             idChannel: '',
             token: ls.get('token'),
             comment: '',
-            members: []
+            members: [],
+            channels: []
 		}
     },
 
@@ -47,9 +48,11 @@ export default {
 
         api.get('/members', ls.get('token')).then((response) => {
             this.members = response.data
-        }).catch( (error) => {
-            alert("La channel auquel vous essayez d'accéder n'existe pas !")
-        });
+        })
+
+        api.get('/channels', ls.get('token')).then((response) => {
+            this.channels = response.data
+        })
     },
 
 	methods: {
