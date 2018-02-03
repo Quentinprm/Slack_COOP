@@ -38,6 +38,19 @@ export default {
 				console.log(error)
 			})
 		},
+		signup ({commit},credentials){
+			return api.post('/members', credentials).then(response => {
+				return api.post('/members/signin', credentials).then(response => {
+					ls.set('token', response.data.token)
+					commit("setConnectedUser", response.data)
+				}).catch(error => {
+					console.log(error)
+				})
+			}).catch(error => {
+				console.log(error)
+			})
+
+		},
 		logout ({commit}, forceDeco) {
 			commit("initState")
 			ls.remove('token')

@@ -6,6 +6,7 @@
             </h1>
 				<div v-for="com in channelData" class="comment">
                     <div class="entete">
+												<img class="commentimg" :src="'https://robohash.org/'+com.member_id">
                         <h3>{{members.filter( (member) => member._id === com.member_id)[0].fullname}} à {{com.created_at}}</h3>
                     </div>
 				    <p>{{com.message}}</p>
@@ -13,7 +14,7 @@
     		</div>
 		<div id="ecrire">
             <form @submit.prevent="sendMessage()">
-                <textarea v-model="comment" id="comment" placeholder="Votre commentaire..."></textarea>
+                <input v-model="comment" id="comment" placeholder="Votre commentaire..." type="text" autocomplete="off"></input>
                 <input type="submit" value="Send">
             </form>
         </div>
@@ -91,6 +92,7 @@ export default {
                     this.channelData = response.data
                 });
             });
+						this.comment=null;
         },
         showModal() {
             this.$modal.show('modal')
@@ -139,14 +141,14 @@ export default {
 border: 1px solid gainsboro;
 margin-bottom:3px;
 }
-textarea{
+#comment{
 width:100%;
 resize:none;
+height: 3vh;
 }
 .entete{
 text-align:center;
 color:#485166;
-border-bottom: 0.5px solid gainsboro;
 }
 
 input[type=submit] {
@@ -183,6 +185,12 @@ border: none;
 cursor: pointer;
 margin-top: 25px;
 font-weight: bolder;
+margin-bottom:1px;
+}
+.commentimg{
+width:9%;
+float:left;
+
 }
 .button:hover{
 opacity:0.4;

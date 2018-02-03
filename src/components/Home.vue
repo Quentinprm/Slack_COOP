@@ -19,9 +19,10 @@
 		</div>
 		<div id="members">
 			<h2>Members</h2>
-			<p v-for="member in members" class="member">
+			<div v-for="member in members" class="member">
+				<img class="memberimg" :src="'https://robohash.org/'+member._id">
 				{{member.fullname}}
-			</p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -104,10 +105,18 @@ overflow: auto;
 		border-bottom: 2px solid deepskyblue;
 	}
 	.member{
-		display:block;
+		width:100%;
+		display:table;
 		color:#000;
 		padding:8ps 16px;
 		test-decoration:none;
+		clear:both;
+		border-bottom: 2px solid LightSlateGrey;
+	}
+	.memberimg{
+	float:left;
+	width:30%;
+
 	}
 	.chan {
 	margin:0;
