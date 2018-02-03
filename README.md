@@ -1,7 +1,7 @@
 # coop
 
-> A Vue.js project
-[SCHOOL] a discussion software using netlor's API http://coop.api.netlor.fr/api in VueJs
+> [SCHOOL] A Vue.js project
+ a discussion software using netlor's API http://coop.api.netlor.fr/api in VueJs
 
 ## dev
 
