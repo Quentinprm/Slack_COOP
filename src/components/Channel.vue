@@ -1,9 +1,8 @@
 <template>
 	<div>
 		<div id="messages">
-			<h1>{{channels.filter( (chan) => chan._id === idChannel)[0].label}} - {{channels.filter( (chan) => chan._id === idChannel)[0].topic}}
-                <button @click="deleteChan()">Delete</button>
-                <button @click="showModal()">Edit</button>
+			<h1>{{channels.filter( (chan) => chan._id === idChannel)[0].label}}
+                <button class="button" id="edit-button" @click="showModal()">Edit</button>
             </h1>
 				<div v-for="com in channelData" class="comment">
                     <div class="entete">
@@ -20,17 +19,18 @@
         </div>
 
         <modal name="modal">
-            <h2>Edit channel</h2>            
+            <h2>Edit channel</h2>
             <form>
                 <p>Enter the new information :</p>
 
                 <label>Name <br><input id="new-name" type="text"></label>
                 <br>
                 <label>Topic <br><input id="new-topic" type="text"></label>
-            
+
                 <br>
-                <button id="save-button" @click="saveChanData">Save</button>
-                <button id="cancel-button" @click="hideModal">Cancel</button>
+                <button  class="button" id="save-button" @click="saveChanData">Save</button>
+                <button  class="button" id="cancel-button" @click="hideModal">Cancel</button>
+								<button  class="button" id="delete-button" @click="deleteChan()">Delete</button>
             </form>
         </modal>
 	</div>
@@ -158,7 +158,9 @@ input[type=submit] {
     cursor: pointer;
     width: 100%;
 }
-
+input[type=submit]:hover{
+	background-color: dodgerblue;
+}
 .v--modal-overlay[data-modal="modal"] form {
     padding-left: 20px;
 }
@@ -173,27 +175,31 @@ input[type=submit] {
 .v--modal-overlay[data-modal="modal"] p {
     margin-bottom: 25px;
 }
-
+.button{
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+margin-top: 25px;
+font-weight: bolder;
+}
+.button:hover{
+opacity:0.4;
+}
 #save-button {
     background-color: lightgreen;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    margin-top: 25px;    
-    font-weight: bolder;
-}
 
+}
+#edit-button {
+    background-color: deepskyblue;
+
+}
+#delete-button {
+    background-color: red;
+}
 #cancel-button {
     background-color: grey;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    margin-top: 25px;   
-    font-weight: bolder;     
 }
 
 </style>

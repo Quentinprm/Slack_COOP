@@ -17,16 +17,23 @@
 		<div id="right">
 			<router-view :key="$route.fullPath"></router-view>
 		</div>
+		<div id="members">
+			<h2>Members</h2>
+			<p v-for="member in members" class="member">
+				{{member.fullname}}
+			</p>
+		</div>
 	</div>
 </template>
 
 <script>
 import api from '@/api'
-
+import ls from '@/services/ls'
 export default {
 	data () {
 		return {
-			channels: []
+			channels: [],
+			members: []
 		}
 	},
 	methods:{
@@ -41,6 +48,9 @@ export default {
 			this.channels = response.data
 		});
 
+		api.get('/members', ls.get('token')).then((response) => {
+				this.members = response.data
+		});
 	},
 	computed: {
 		hasChannel () {
@@ -75,6 +85,16 @@ export default {
  height: 100%;
  overflow: auto;
 	}
+#members{
+list-style-type:none;
+margin: 0;
+padding: 0;
+width: 25%;
+background-color: #f1f1f1;
+position: float;
+height: 100vh;
+overflow: auto;
+}
 	h2 {
 		color:grey;
 		text-align: center;
@@ -82,6 +102,12 @@ export default {
 		padding-bottom: 5px;
 		padding-top: 5px;
 		border-bottom: 2px solid deepskyblue;
+	}
+	.member{
+		display:block;
+		color:#000;
+		padding:8ps 16px;
+		test-decoration:none;
 	}
 	.chan {
 	margin:0;
