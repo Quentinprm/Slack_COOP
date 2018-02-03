@@ -3,7 +3,8 @@
 > A Vue.js project
 [SCHOOL] a discussion software using netlor's API http://coop.api.netlor.fr/api in VueJs
 
-##Dev
+# dev
+
 Allan Demarbre - Quentin Parmentier
 
 ## Build Setup
